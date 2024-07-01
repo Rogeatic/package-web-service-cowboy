@@ -19,7 +19,7 @@ start(_Type, _Args) ->
         ]}
     ]),
 
-    PrivDir = code:priv_dir('package_web_service'),
+    PrivDir = code:priv_dir(package_web_service),
     %tls stands for transport layer security
         {ok,_} = cowboy:start_tls(https_listener, [
                           {port, 443},
