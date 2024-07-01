@@ -12,10 +12,10 @@
 start(_Type, _Args) ->
     Dispatch = cowboy_router:compile([
         {'_', [
-            {"/", default_page_h, []},
-            {"/", default_page_h, []},
-            {"/", default_page_h, []},
-            {"/", default_page_h, []}
+            {"/package_transferred", package_transferred_h, []},
+            {"/delivered", delivered_h, []},
+            {"/location_request", location_request_h, []},
+            {"/location_update", location_update_h, []}
         ]}
     ]),
 
