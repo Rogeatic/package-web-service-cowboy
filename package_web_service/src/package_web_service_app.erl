@@ -15,6 +15,7 @@ start(_Type, _Args) ->
             {"/package_transferred", package_transferred_h, []},
             {"/delivered", delivered_h, []},
             {"/location_request", location_request_h, []},
+            {"/", default_page_h, []},
             {"/location_update", location_update_h, []}
         ]}
     ]),
