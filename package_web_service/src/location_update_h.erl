@@ -16,7 +16,7 @@ init(Req0, Opts) ->
    
 
        io:format("~s~n", [jsx:encode(DataReceived)]),
-       Indicator = case erpc:call("bus@businesslogic.williamsonline.net", "package_server", "update_location", [
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'update_location', [
        maps:get(<<"location_id">>, DataReceived),maps:get(<<"long">>, DataReceived),  maps:get(<<"lat">>, DataReceived)]) of 
               worked -> 200;
               _ -> 500
