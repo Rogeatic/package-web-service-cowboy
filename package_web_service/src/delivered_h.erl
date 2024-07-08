@@ -8,7 +8,7 @@ init(Req0, Opts) ->
     % FIX THIS LINE and include jsx
     % {Location_id, Package_id}
     DataRecieved = jsx:decode(Data),
-    io:format(DataRecieved),
+    io:format("~s~n", [DataRecieved]),
 
     
     %Result = case 
