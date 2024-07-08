@@ -8,7 +8,7 @@ init(Req0, Opts) ->
     % FIX THIS LINE and include jsx
     % {Location_id, Package_id}
     DataRecieved = jsx:decode(Data),
-    io:format("~s~n", [DataRecieved]),
+    io:format("~s~n", [jsx:encode(DataRecieved)]),
     %Result = case 
 
     Req = cowboy_req:reply(200, #{
