@@ -16,11 +16,10 @@ init(Req0, Opts) ->
    
 
        io:format("~s~n", [jsx:encode(DataReceived)]),
-       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'update_location', [
-       maps:get(<<"location_id">>, DataReceived),maps:get(<<"long">>, DataReceived),  maps:get(<<"lat">>, DataReceived)]) of 
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'update_location', [LocationId, Longitude, Latitude]) of 
               worked -> 200;
               _ -> 500
-       end,
+              end,
        Req = cowboy_req:reply(Indicator, #{ <<"content-type">> => <<"text/plain">>}),
 
        {ok, Req, Opts}.
