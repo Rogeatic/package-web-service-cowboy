@@ -10,7 +10,7 @@ init(Req0, Opts) ->
        DataRecieved = jsx:decode(Data),
        io:format("~s~n", [jsx:encode(DataRecieved)]),
        Indicator = case erpc:call("businesslogic.williamsonline.net", "package_server", "update_location", [
-       maps:get("location_id", DataRecieved),maps:get("long", DataRecieved),  maps:get("lat", DataRecieved)]) of 
+       maps:get(<<"location_id">>, DataRecieved),maps:get(<<"long">>, DataRecieved),  maps:get(<<"lat">>, DataRecieved)]) of 
               worked -> 200;
               _ -> 500
        end,
