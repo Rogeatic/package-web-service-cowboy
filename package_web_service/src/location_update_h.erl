@@ -7,10 +7,17 @@ init(Req0, Opts) ->
 
        % FIX THIS LINE and include jsx
        % {Location_id, Package_id}
-       DataRecieved = jsx:decode(Data),
-       io:format("~s~n", [jsx:encode(DataRecieved)]),
+       DataReceived = jsx:decode(Data),
+
+       LocationId = maps:get(<<"location_id">>, DataReceived),
+       Longitude = maps:get(<<"long">>, DataReceived),
+       Latitude = maps:get(<<"lat">>, DataReceived),
+       io:format("Location ID: ~p, Longitude: ~p, Latitude: ~p~n", [LocationId, Longitude, Latitude]),
+   
+
+       io:format("~s~n", [jsx:encode(DataReceived)]),
        Indicator = case erpc:call("bus@businesslogic.williamsonline.net", "package_server", "update_location", [
-       maps:get(<<"location_id">>, DataRecieved),maps:get(<<"long">>, DataRecieved),  maps:get(<<"lat">>, DataRecieved)]) of 
+       maps:get(<<"location_id">>, DataReceived),maps:get(<<"long">>, DataReceived),  maps:get(<<"lat">>, DataReceived)]) of 
               worked -> 200;
               _ -> 500
        end,
