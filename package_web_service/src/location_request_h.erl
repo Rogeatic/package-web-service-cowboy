@@ -11,7 +11,5 @@ init(Req0, Opts) ->
     io:format("~s~n", [DataRecieved]),
     %Result = case 
 
-    Req = cowboy_req:reply(200, #{
-           <<"content-type">> => <<"text/plain">>
-    }, "", Req0),
+    Req = cowboy_req:reply(200, #{ <<"content-type">> => <<"text/plain">> }, "", Req0),
     {ok, Req, Opts}.
