@@ -5,9 +5,12 @@
 init(Req0, Opts) ->
        {ok, Data,_} = cowboy_req:read_body(Req0),
        DataRecieved = jsx:decode(Data),
+       LocationId = maps:get(<<"location_id">>, DataRecieved),
+       PackageId = maps:get(<<"package_id">>, DataRecieved),
+       
+       io:format("Package ID: ~p, Location ID: ~p~n", [PackageId, LocationId]),
        io:format("~s~n", [jsx:encode(DataRecieved)]),
-       Indicator = case erpc:call("businesslogic.williamsonline.net", "package_server", "transfer_package", [
-       maps:get(location_id, DataRecieved), maps:get(long, DataRecieved), maps:get(lat, DataRecieved)]) of 
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'transfer_package', [PackageId, LocationId]) of 
               worked -> 200;
               _ -> 500
               end,
