@@ -8,7 +8,9 @@ init(Req0, Opts) ->
        
        io:format("Package ID: ~p~n", [Data]),
        io:format("~s~n", [jsx:encode(Package_id)]),
-       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', [Package_id]) of 
+       io:format("~s~n", [Package_id]),
+
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', [jsx:encode(Package_id)]) of 
               worked -> 200;
               _ -> 500
               end,
