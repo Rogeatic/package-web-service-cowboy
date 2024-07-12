@@ -4,12 +4,11 @@
 
 init(Req0, Opts) ->
        {ok, Data,_} = cowboy_req:read_body(Req0),
-       DataRecieved = jsx:decode(Data),
-       PackageId = maps:get(<<"package_id">>, DataRecieved),
+       Package_id = jsx:decode(Data),
        
-       io:format("Package ID: ~p~n", [PackageId]),
-       io:format("~s~n", [jsx:encode(DataRecieved)]),
-       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', [PackageId]) of 
+       io:format("Package ID: ~p~n", [Package_id]),
+       io:format("~s~n", [jsx:encode(Package_id)]),
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', [Package_id]) of 
               worked -> 200;
               _ -> 500
               end,
