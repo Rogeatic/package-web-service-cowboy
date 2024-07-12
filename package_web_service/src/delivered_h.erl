@@ -12,7 +12,7 @@ init(Req0, Opts) ->
        io:format("~s~n", ["Hello World"]),
 
 
-       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', [jsx:encode(Package_id)]) of 
+       Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'delivered', Package_id) of 
               worked -> 200;
               _ -> 500
               end,
