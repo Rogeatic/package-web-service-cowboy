@@ -7,9 +7,6 @@ init(Req0, Opts) ->
        DataRecieved = jsx:decode(Data),
        LocationId = maps:get(<<"location_id">>, DataRecieved),
        PackageId = maps:get(<<"package_id">>, DataRecieved),
-       
-       io:format("Package ID: ~p, Location ID: ~p~n", [PackageId, LocationId]),
-       io:format("~s~n", [jsx:encode(DataRecieved)]),
        Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'transfer_package', [PackageId, LocationId]) of 
               worked -> 200;
               _ -> 500

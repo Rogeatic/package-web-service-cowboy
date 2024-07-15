@@ -8,9 +8,6 @@ init(Req0, Opts) ->
        LocationId = maps:get(<<"location_id">>, DataReceived),
        Longitude = maps:get(<<"long">>, DataReceived),
        Latitude = maps:get(<<"lat">>, DataReceived),
-       io:format("Location ID: ~p, Longitude: ~p, Latitude: ~p~n", [LocationId, Longitude, Latitude]),
-
-       io:format("~s~n", [jsx:encode(DataReceived)]),
        Indicator = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'update_location', [LocationId, Longitude, Latitude]) of 
               worked -> 200;
               _ -> 500
