@@ -9,7 +9,7 @@ init(Req0, Opts) ->
        io:format("ERP result: ~p~n", [erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'location_request', [Package_id])]),
        Req = case erpc:call('bus@businesslogic.williamsonline.net', 'package_server', 'location_request', [Package_id]) of 
               {worked, Long, Lat} ->
-                     cowboy_req:reply(200, #{ <<"content-type">> => <<"text/plain">>}, jsx:encode(#{<<"Long">> => Long, <<"Lat">> => Lat}), Req0);
+                     cowboy_req:reply(200, #{ <<"content-type">> => <<"text/plain">>}, jsx:encode(#{<<"long">> => Long, <<"lat">> => Lat}), Req0);
               _ ->
                      cowboy_req:reply(500, #{ <<"content-type">> => <<"text/plain">>}, Req0)
               end,
